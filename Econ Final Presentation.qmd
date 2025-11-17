@@ -17,10 +17,9 @@ When you click the **Render** button a document will be generated that includes:
 
 ## Code
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+When you click the **Render** button, a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-HEAD
 1 + 2
 
 
