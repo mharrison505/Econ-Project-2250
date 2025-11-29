@@ -31,3 +31,24 @@ print(hi)
 
 1+1
 ```
+
+```{r}
+#Im testing to see if it works
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+tidyverse,
+probstats4econ,
+kableExtra,
+RColorBrewer,
+curl,
+usethis)
+
+X2022%>%glimpse()
+
+```
+
+```{r}
+plot(X2022$PA, X2022$RYds,xlab="PA",ylab="RYds")
+```
