@@ -51,6 +51,7 @@ X2022%>%glimpse()
 ```
 
 ```{r}
+#all the 2022 stats, wins v PA
 plot(X2022WITHWINS$Wins, X2022WITHWINS$PA,xlab="Wins",ylab="Points Allowed")
 
 text(X2022WITHWINS$Wins,
@@ -83,4 +84,150 @@ text(x = max(X2022WITHWINS$Wins),
      labels = eq,
      pos = 4)
 
+### Wins v RY/G
+plot(X2022WITHWINS$Wins, X2022WITHWINS$`RY/G`,xlab="Wins",ylab="Rushing/Game")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$`RY/G`,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)  
+ggplot(X2022WITHWINS, aes(x = Wins, y = `RY/G`, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Rushing Yards Per Game", title = "NFL 2022 Wins vs Rushing Yards Per Game") +
+  theme_minimal()
+
+
+model <- lm(`RY/G` ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$`RY/G`),
+     labels = eq,
+     pos = 4)
+
+### Wins V PY/G
+plot(X2022WITHWINS$Wins, X2022WITHWINS$`PY/G`,xlab="Wins",ylab="Passing/Game")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$`PY/G`,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)  
+ggplot(X2022WITHWINS, aes(x = Wins, y = `PY/G`, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Passing Yards Per Game", title = "NFL 2022 Wins vs Passing Yards Per Game") +
+  theme_minimal()
+
+
+model <- lm(`PY/G` ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$`PY/G`),
+     labels = eq,
+     pos = 4)
+
+# Wins V Pts For
+plot(X2022WITHWINS$Wins, X2022WITHWINS$`Pts For`,xlab="Wins",ylab="Pts/G")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$`Pts For`,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)  
+ggplot(X2022WITHWINS, aes(x = Wins, y = `Pts For`, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Points Scored Per Game", title = "NFL 2022 Wins vs Points Scored Per Game") +
+  theme_minimal()
+
+
+model <- lm(`Pts For` ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$`Pts For`),
+     labels = eq,
+     pos = 4)
+
+###Wins v PYA
+
+plot(X2022WITHWINS$Wins, X2022WITHWINS$PYdsA,xlab="Wins",ylab="Passing/Game")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$PYdsA,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)  
+ggplot(X2022WITHWINS, aes(x = Wins, y = PYdsA, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Passing Yards Allowed Per Game", title = "NFL 2022 Wins vs Passing Yards Allowed Per Game") +
+  theme_minimal()
+
+
+model <- lm(PYdsA ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$PYdsA),
+     labels = eq,
+     pos = 4)
+
+##Wins v RYA
+
+plot(X2022WITHWINS$Wins, X2022WITHWINS$RYdsA,xlab="Wins",ylab="RYA/Game")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$RYdsA,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)  
+ggplot(X2022WITHWINS, aes(x = Wins, y = `PY/G`, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Rushing Yards Allowed Per Game", title = "NFL 2022 Wins vs Rushing Yards Allowed Per Game") +
+  theme_minimal()
+
+
+model <- lm(RYdsA ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$RYdsA),
+     labels = eq,
+     pos = 4)
 ```
