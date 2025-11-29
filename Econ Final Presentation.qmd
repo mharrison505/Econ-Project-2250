@@ -46,7 +46,7 @@ curl,
 usethis,
 ggrepel)
 
-X2022%>%glimpse()
+#X2022WITHWINS%>%glimpse()
 
 ```
 
