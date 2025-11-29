@@ -43,7 +43,8 @@ probstats4econ,
 kableExtra,
 RColorBrewer,
 curl,
-usethis)
+usethis,
+ggrepel)
 
 X2022%>%glimpse()
 
@@ -56,9 +57,30 @@ text(X2022WITHWINS$Wins,
      X2022WITHWINS$PA,
      labels = X2022WITHWINS$Tm,   
      pos = 3,                       
-     cex = 0.3)   
+     cex = 0.3)  
+
+library(ggplot2)
+library(ggrepel)
+
+ggplot(X2022WITHWINS, aes(x = Wins, y = PA, label = Tm)) +
+  geom_point(size = 3) +                       
+  ggrepel::geom_text_repel(size = 3) +          
+  labs(x = "Wins", y = "Points Allowed", title = "NFL 2022 Wins vs Points Allowed") +
+  theme_minimal()
+
 
 model <- lm(PA ~ Wins, data = X2022WITHWINS)
 
 abline(model, col = "green", lwd = 2)
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(X2022WITHWINS$Wins),
+     y = min(X2022WITHWINS$PA),
+     labels = eq,
+     pos = 4)
+
 ```
