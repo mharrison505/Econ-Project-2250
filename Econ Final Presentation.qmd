@@ -51,4 +51,14 @@ X2022%>%glimpse()
 
 ```{r}
 plot(X2022WITHWINS$Wins, X2022WITHWINS$PA,xlab="Wins",ylab="Points Allowed")
+
+text(X2022WITHWINS$Wins,
+     X2022WITHWINS$PA/X2022WITHWINS$PYdsA,
+     labels = X2022WITHWINS$Tm,   
+     pos = 3,                       
+     cex = 0.3)   
+
+model <- lm(PA ~ Wins, data = X2022WITHWINS)
+
+abline(model, col = "green", lwd = 2)
 ```
