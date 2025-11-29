@@ -53,7 +53,7 @@ X2022%>%glimpse()
 plot(X2022WITHWINS$Wins, X2022WITHWINS$PA,xlab="Wins",ylab="Points Allowed")
 
 text(X2022WITHWINS$Wins,
-     X2022WITHWINS$PA/X2022WITHWINS$PYdsA,
+     X2022WITHWINS$PA,
      labels = X2022WITHWINS$Tm,   
      pos = 3,                       
      cex = 0.3)   
