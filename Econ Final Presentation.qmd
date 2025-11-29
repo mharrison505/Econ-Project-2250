@@ -50,5 +50,5 @@ X2022%>%glimpse()
 ```
 
 ```{r}
-plot(X2022WITHWINS$Wins, X2022WITHWINS$PA,xlab="Wins",ylab="PA")
+plot(X2022WITHWINS$Wins, X2022WITHWINS$PA,xlab="Wins",ylab="Points Allowed")
 ```
