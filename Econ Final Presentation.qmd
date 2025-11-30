@@ -20,19 +20,6 @@ When you click the **Render** button a document will be generated that includes:
 When you click the **Render** button, a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-1 + 2
-
-1+3+4
-
-1 + 2 + 3
-
-hi=2
-print(hi)
-
-1+1
-```
-
-```{r}
 #Im testing to see if it works
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
@@ -620,4 +607,158 @@ labs(x = "Wins",
 y = "Points Allowed/Game",
 title = "NFL Wins vs Points Allowed/Game (2021)") +
 theme_minimal()
+```
+
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+# Wins vs Passing Yards/Game
+model_pass <- lm(PassYds_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = PassYds_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "green") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$PassYds_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_pass)[2], 2), "x + ", round(coef(model_pass)[1], 2),
+      "\nR = ", round(sign(coef(model_pass)[2]) * sqrt(summary(model_pass)$r.squared), 3),
+      ", R² = ", round(summary(model_pass)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Passing Yards per Game",
+    title = "NFL 2019: Wins vs Passing Yards per Game"
+  ) +
+  theme_minimal()
+
+# Wins vs Rushing Yards/Game
+model_rush <- lm(RushYds_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = RushYds_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$RushYds_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_rush)[2], 2), "x + ", round(coef(model_rush)[1], 2),
+      "\nR = ", round(sign(coef(model_rush)[2]) * sqrt(summary(model_rush)$r.squared), 3),
+      ", R² = ", round(summary(model_rush)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Rushing Yards per Game",
+    title = "NFL 2019: Wins vs Rushing Yards per Game"
+  ) +
+  theme_minimal()
+
+# Wins vs Points per Game
+model_pts <- lm(Pts_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = Pts_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "purple") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$Pts_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_pts)[2], 2), "x + ", round(coef(model_pts)[1], 2),
+      "\nR = ", round(sign(coef(model_pts)[2]) * sqrt(summary(model_pts)$r.squared), 3),
+      ", R² = ", round(summary(model_pts)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Points per Game",
+    title = "NFL 2019: Wins vs Points per Game"
+  ) +
+  theme_minimal()
+# Wins vs Passing Yards Allowed per Game
+model_pass_allowed <- lm(PassYdsAllowed_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = PassYdsAllowed_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$PassYdsAllowed_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_pass_allowed)[2], 2), "x + ", round(coef(model_pass_allowed)[1], 2),
+      "\nR = ", round(sign(coef(model_pass_allowed)[2]) * sqrt(summary(model_pass_allowed)$r.squared), 3),
+      ", R² = ", round(summary(model_pass_allowed)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Passing Yards Allowed per Game",
+    title = "NFL 2019: Wins vs Passing Yards Allowed per Game"
+  ) +
+  theme_minimal()
+# Wins vs Rushing Yards Allowed per Game
+model_rush_allowed <- lm(RushYdsAllowed_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = RushYdsAllowed_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "orange") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$RushYdsAllowed_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_rush_allowed)[2], 2), "x + ", round(coef(model_rush_allowed)[1], 2),
+      "\nR = ", round(sign(coef(model_rush_allowed)[2]) * sqrt(summary(model_rush_allowed)$r.squared), 3),
+      ", R² = ", round(summary(model_rush_allowed)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Rushing Yards Allowed per Game",
+    title = "NFL 2019: Wins vs Rushing Yards Allowed per Game"
+  ) +
+  theme_minimal()
+# Wins vs Points Allowed per Game
+model_pts_allowed <- lm(PtsAllowed_pg ~ W, data = nfl_2019)
+
+ggplot(nfl_2019, aes(x = W, y = PtsAllowed_pg, label = Team)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "brown") +
+  annotate(
+    "text",
+    x = max(nfl_2019$W),
+    y = min(nfl_2019$PtsAllowed_pg),
+    hjust = 1,
+    label = paste0(
+      "y = ", round(coef(model_pts_allowed)[2], 2), "x + ", round(coef(model_pts_allowed)[1], 2),
+      "\nR = ", round(sign(coef(model_pts_allowed)[2]) * sqrt(summary(model_pts_allowed)$r.squared), 3),
+      ", R² = ", round(summary(model_pts_allowed)$r.squared, 3)
+    )
+  ) +
+  labs(
+    x = "Wins",
+    y = "Points Allowed per Game",
+    title = "NFL 2019: Wins vs Points Allowed per Game"
+  ) +
+  theme_minimal()
+
+
 ```
