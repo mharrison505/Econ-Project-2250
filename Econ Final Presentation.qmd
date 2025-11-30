@@ -232,212 +232,43 @@ text(x = max(X2022WITHWINS$Wins),
      pos = 4)
 ```
 
-## 2024 NFL Stats compared to regular season wins
-
 ```{r}
-library(readxl)
-library(dplyr)
-library(ggplot2)
+#length(New2021NFL$Win6)
+#length(New2021NFL$`PA/G`)
+#length(New2021NFL$Tm.5)
 
-# Read Excel
-stats <- read_excel("All stats 2024.xlsx")
+names(New2021NFL)[names(New2021NFL) == "PA/G"]  <- "PA"      # Points allowed per game
+names(New2021NFL)[names(New2021NFL) == "Tm.5"]  <- "Tm_PA"   # Team names associated with PA
 
-# Define the 32 NFL teams
-teams <- c(
-  "Baltimore Ravens","Minnesota Vikings","Denver Broncos","Tampa Bay Buccaneers","Detroit Lions",
-  "Pittsburgh Steelers","Green Bay Packers","Kansas City Chiefs","Miami Dolphins","Philadelphia Eagles",
-  "Houston Texans","Buffalo Bills","Las Vegas Raiders","Los Angeles Chargers","Atlanta Falcons",
-  "Seattle Seahawks","New York Jets","San Francisco 49ers","Cincinnati Bengals","Arizona Cardinals",
-  "Cleveland Browns","Los Angeles Rams","New England Patriots","Indianapolis Colts","Jacksonville Jaguars",
-  "Tennessee Titans","New York Giants","Chicago Bears","Dallas Cowboys","Washington Commanders",
-  "New Orleans Saints","Carolina Panthers"
-)
+#Use the final wins column
+New2021NFL$Wins <- New2021NFL$Win6
 
-# Keep only rows that match real team names
-stats_clean <- stats %>% filter(Tm...2 %in% teams)
+#Base plot
+plot(New2021NFL$Wins,
+     New2021NFL$PA,
+     xlab = "Wins",
+     ylab = "Points Allowed Per Game",
+     main = "Wins vs Points Allowed (2021)")
 
-# Add Wins in the same order as the rows in your file
-stats_clean$Wins <- c(
-  13, 7, 8, 9, 12, 10, 11, 11, 11, 11, 11, 11, 7, 6, 7, 9,
-  6, 12, 9, 4, 11, 9, 4, 9, 9, 6, 6, 9, 12, 4, 9, 2
-)
+text(New2021NFL$Wins,
+     New2021NFL$PA,
+     labels = New2021NFL$Tm_PA,
+     pos = 3,
+     cex = 0.5)
 
-# Convert stat columns to numeric
-stats_clean <- stats_clean %>%
-  mutate(across(c(`Rush YdA/G`, `Pass Y/G`, `Pts/G`, `Pass YdA/G`, `PA/G`, `Rush Y/G`), as.numeric))
+#Regression model
+model <- lm(PA ~ Wins, data = New2021NFL)
+abline(model, col = "green", lwd = 2)
 
-# Wins vs Rush YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
+#Equation text
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
 
-# Wins vs Pass Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pts/G
-r <- cor(stats_clean$Wins, stats_clean$`Pts/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pts/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pts/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pass YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs PA/G
-r <- cor(stats_clean$Wins, stats_clean$`PA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`PA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs PA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Rush Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-```
-
-```{r}
-library(readxl)
-library(dplyr)
-library(ggplot2)
-
-# Read Excel
-stats <- read_excel("All stats 2024.xlsx")
-
-# Define the 32 NFL teams
-teams <- c(
-  "Baltimore Ravens","Minnesota Vikings","Denver Broncos","Tampa Bay Buccaneers","Detroit Lions",
-  "Pittsburgh Steelers","Green Bay Packers","Kansas City Chiefs","Miami Dolphins","Philadelphia Eagles",
-  "Houston Texans","Buffalo Bills","Las Vegas Raiders","Los Angeles Chargers","Atlanta Falcons",
-  "Seattle Seahawks","New York Jets","San Francisco 49ers","Cincinnati Bengals","Arizona Cardinals",
-  "Cleveland Browns","Los Angeles Rams","New England Patriots","Indianapolis Colts","Jacksonville Jaguars",
-  "Tennessee Titans","New York Giants","Chicago Bears","Dallas Cowboys","Washington Commanders",
-  "New Orleans Saints","Carolina Panthers"
-)
-
-# Keep only rows that match real team names
-stats_clean <- stats %>% filter(Tm...2 %in% teams)
-
-# Add Wins in the same order as the rows in your file
-stats_clean$Wins <- c(
-  13, 7, 8, 9, 12, 10, 11, 11, 11, 11, 11, 11, 7, 6, 7, 9,
-  6, 12, 9, 4, 11, 9, 4, 9, 9, 6, 6, 9, 12, 4, 9, 2
-)
-
-# Convert stat columns to numeric
-stats_clean <- stats_clean %>%
-  mutate(across(c(`Rush YdA/G`, `Pass Y/G`, `Pts/G`, `Pass YdA/G`, `PA/G`, `Rush Y/G`), as.numeric))
-
-# Wins vs Rush YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pass Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pts/G
-r <- cor(stats_clean$Wins, stats_clean$`Pts/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pts/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pts/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pass YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs PA/G
-r <- cor(stats_clean$Wins, stats_clean$`PA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`PA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs PA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Rush Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-library(readxl)
-library(dplyr)
-library(ggplot2)
-
-# Read Excel
-stats <- read_excel("All stats 2024.xlsx")
-
-# Define the 32 NFL teams
-teams <- c(
-  "Baltimore Ravens","Minnesota Vikings","Denver Broncos","Tampa Bay Buccaneers","Detroit Lions",
-  "Pittsburgh Steelers","Green Bay Packers","Kansas City Chiefs","Miami Dolphins","Philadelphia Eagles",
-  "Houston Texans","Buffalo Bills","Las Vegas Raiders","Los Angeles Chargers","Atlanta Falcons",
-  "Seattle Seahawks","New York Jets","San Francisco 49ers","Cincinnati Bengals","Arizona Cardinals",
-  "Cleveland Browns","Los Angeles Rams","New England Patriots","Indianapolis Colts","Jacksonville Jaguars",
-  "Tennessee Titans","New York Giants","Chicago Bears","Dallas Cowboys","Washington Commanders",
-  "New Orleans Saints","Carolina Panthers"
-)
-
-# Keep only rows that match real team names
-stats_clean <- stats %>% filter(Tm...2 %in% teams)
-
-# Add Wins in the same order as the rows in your file
-stats_clean$Wins <- c(
-  13, 7, 8, 9, 12, 10, 11, 11, 11, 11, 11, 11, 7, 6, 7, 9,
-  6, 12, 9, 4, 11, 9, 4, 9, 9, 6, 6, 9, 12, 4, 9, 2
-)
-
-# Convert stat columns to numeric
-stats_clean <- stats_clean %>%
-  mutate(across(c(`Rush YdA/G`, `Pass Y/G`, `Pts/G`, `Pass YdA/G`, `PA/G`, `Rush Y/G`), as.numeric))
-
-# Wins vs Rush YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pass Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pts/G
-r <- cor(stats_clean$Wins, stats_clean$`Pts/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pts/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pts/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Pass YdA/G
-r <- cor(stats_clean$Wins, stats_clean$`Pass YdA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Pass YdA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Pass YdA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs PA/G
-r <- cor(stats_clean$Wins, stats_clean$`PA/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`PA/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs PA/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-# Wins vs Rush Y/G
-r <- cor(stats_clean$Wins, stats_clean$`Rush Y/G`); r2 <- r^2
-ggplot(stats_clean, aes(x=`Rush Y/G`, y=Wins)) +
-  geom_point() + geom_smooth(method="lm", se=FALSE, color="red") +
-  labs(title="Wins vs Rush Y/G", subtitle=paste("r =", round(r,3), " r^2 =", round(r2,3)))
-
-
+text(x = max(New2021NFL$Wins),
+     y = min(New2021NFL$PA),
+     labels = eq,
+     pos = 4)
 
 ```
