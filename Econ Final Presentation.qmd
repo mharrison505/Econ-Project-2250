@@ -262,3 +262,362 @@ tidy(model_2019)
 glance(model_2019)  # overall fit (R-squared, etc.)
 
 ```
+
+```{r}
+# Passing Yards A Game
+
+plot(NEWNEW2021NFL$Win1,
+     NEWNEW2021NFL$PY_G,
+     xlab = "Wins",
+     ylab = "Passing Yards/Game",
+     main = "NFL Wins vs Passing Yards/Game (2021)")
+
+
+text(NEWNEW2021NFL$Win1,
+     NEWNEW2021NFL$PY_G,
+     labels = NEWNEW2021NFL$Tm,
+     pos = 3,
+     cex = 0.5)
+
+
+model <- lm(PY_G ~ Win1, data = NEWNEW2021NFL)
+
+
+abline(model, col = "green", lwd = 2)
+
+
+eq <- paste0("y = ",
+             round(coef(model)[2], 2),
+             "x + ",
+             round(coef(model)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win1),
+     y = min(NEWNEW2021NFL$PY_G),
+     labels = eq,
+     pos = 4)
+
+library(ggplot2)
+library(ggrepel)
+
+ggplot(NEWNEW2021NFL, aes(x = Win1, y = PY_G, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  labs(x = "Wins",
+       y = "Passing Yards/Game",
+       title = "NFL Wins vs Passing Yards (2021)") +
+  theme_minimal()
+
+ggplot(NEWNEW2021NFL, aes(x = Win1, y = PY_G, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "green") +
+  annotate("text",
+           x = max(NEWNEW2021NFL$Win1),
+           y = max(NEWNEW2021NFL$PY_G),
+           label = paste0("R = ", round(sign(coef(model)[2]) * sqrt(summary(model)$r.squared), 3),
+                          ", R² = ", round(summary(model)$r.squared, 3)),
+           hjust = 1) +
+  labs(x = "Wins",
+       y = "Passing Yards/Game",
+       title = "NFL Wins vs Passing Yards/Game (2021)") +
+  theme_minimal()
+
+# Rushing Yards A GAME
+
+plot(NEWNEW2021NFL$Win2,
+     NEWNEW2021NFL$RY_G,
+     xlab = "Wins",
+     ylab = "Rushing Yards/Game",
+     main = "NFL Wins vs Rushing Yards/Game (2021)")
+
+
+text(NEWNEW2021NFL$Win2,
+     NEWNEW2021NFL$RY_G,
+     labels = NEWNEW2021NFL$Tm.1,
+     pos = 3,
+     cex = 0.5)
+
+
+model2 <- lm(RY_G ~ Win2, data = NEWNEW2021NFL)
+
+
+abline(model2, col = "blue", lwd = 2)
+
+
+eq2 <- paste0("y = ",
+             round(coef(model2)[2], 2),
+             "x + ",
+             round(coef(model2)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win2),
+     y = min(NEWNEW2021NFL$RY_G),
+     labels = eq2,
+     pos = 4)
+
+library(ggplot2)
+library(ggrepel)
+
+ggplot(NEWNEW2021NFL, aes(x = Win2, y = RY_G, label = Tm.1)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  labs(x = "Wins",
+       y = "Rushing Yards/Game",
+       title = "NFL Wins vs Rushing Yards (2021)") +
+  theme_minimal()
+ggplot(NEWNEW2021NFL, aes(x = Win2, y = RY_G, label = Tm.1)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+geom_smooth(method = "lm", se = FALSE, color = "blue") +
+annotate("text",
+x = max(NEWNEW2021NFL$Win2),
+y = max(NEWNEW2021NFL$RY_G),
+label = paste0("R = ", round(sign(coef(model2)[2]) * sqrt(summary(model2)$r.squared), 3),
+", R² = ", round(summary(model2)$r.squared, 3)),
+hjust = 1) +
+labs(x = "Wins",
+y = "Rushing Yards/Game",
+title = "NFL Wins vs Rushing Yards/Game (2021)") +
+theme_minimal()
+
+# Points per Game.
+
+
+library(ggplot2)
+library(ggrepel)
+
+plot(NEWNEW2021NFL$Win3,
+NEWNEW2021NFL$Pts_G,
+xlab = "Wins",
+ylab = "Points/Game",
+main = "NFL Wins vs Points/Game (2021)")
+
+text(NEWNEW2021NFL$Win3,
+NEWNEW2021NFL$Pts_G,
+labels = NEWNEW2021NFL$Tm.2,
+pos = 3,
+cex = 0.5)
+
+model3 <- lm(Pts_G ~ Win3, data = NEWNEW2021NFL)
+
+
+abline(model3, col = "blue", lwd = 2)
+
+
+eq3 <- paste0("y = ",
+round(coef(model3)[2], 2),
+"x + ",
+round(coef(model3)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win3),
+y = min(NEWNEW2021NFL$Pts_G),
+labels = eq3,
+pos = 4)
+
+
+ggplot(NEWNEW2021NFL, aes(x = Win3, y = Pts_G, label = Tm.2)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+labs(x = "Wins",
+y = "Points/Game",
+title = "NFL Wins vs Points/Game (2021)") +
+theme_minimal()
+
+ggplot(NEWNEW2021NFL, aes(x = Win3, y = Pts_G, label = Tm.2)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+geom_smooth(method = "lm", se = FALSE, color = "blue") +
+annotate("text",
+x = max(NEWNEW2021NFL$Win3),
+y = max(NEWNEW2021NFL$Pts_G),
+label = paste0("R = ", round(sign(coef(model3)[2]) * sqrt(summary(model3)$r.squared), 3),
+", R² = ", round(summary(model3)$r.squared, 3)),
+hjust = 1) +
+labs(x = "Wins",
+y = "Points/Game",
+title = "NFL Wins vs Points/Game (2021)") +
+theme_minimal()
+
+
+# PASSING YARDS ALLOWED
+
+
+library(ggplot2)
+library(ggrepel)
+
+
+plot(NEWNEW2021NFL$Win4,
+NEWNEW2021NFL$PYA_G,
+xlab = "Wins",
+ylab = "Passing Yards Allowed/Game",
+main = "NFL Wins vs Passing Yards Allowed/Game (2021)")
+
+
+text(NEWNEW2021NFL$Win4,
+NEWNEW2021NFL$PYA_G,
+labels = NEWNEW2021NFL$Tm.3,
+pos = 3,
+cex = 0.5)
+
+
+model4 <- lm(PYA_G ~ Win4, data = NEWNEW2021NFL)
+
+
+abline(model4, col = "blue", lwd = 2)
+
+
+eq4 <- paste0("y = ",
+round(coef(model4)[2], 2),
+"x + ",
+round(coef(model4)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win4),
+y = min(NEWNEW2021NFL$PYA_G),
+labels = eq4,
+pos = 4)
+
+
+ggplot(NEWNEW2021NFL, aes(x = Win4, y = PYA_G, label = Tm.3)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+labs(x = "Wins",
+y = "Passing Yards Allowed/Game",
+title = "NFL Wins vs Passing Yards Allowed/Game (2021)") +
+theme_minimal()
+ggplot(NEWNEW2021NFL, aes(x = Win4, y = PYA_G, label = Tm.3)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+geom_smooth(method = "lm", se = FALSE, color = "blue") +
+annotate("text",
+x = max(NEWNEW2021NFL$Win4),
+y = max(NEWNEW2021NFL$PYA_G),
+label = paste0("R = ", round(sign(coef(model4)[2]) * sqrt(summary(model4)$r.squared), 3),
+", R² = ", round(summary(model4)$r.squared, 3)),
+hjust = 1) +
+labs(x = "Wins",
+y = "Passing Yards Allowed/Game",
+title = "NFL Wins vs Passing Yards Allowed/Game (2021)") +
+theme_minimal()
+
+
+# Rushing Yards Allowed
+
+
+library(ggplot2)
+library(ggrepel)
+
+
+plot(NEWNEW2021NFL$Win5,
+NEWNEW2021NFL$RYA_G,
+xlab = "Wins",
+ylab = "Rushing Yards Allowed/Game",
+main = "NFL Wins vs Rushing Yards Allowed/Game (2021)")
+
+
+text(NEWNEW2021NFL$Win5,
+NEWNEW2021NFL$RYA_G,
+labels = NEWNEW2021NFL$Tm.4,
+pos = 3,
+cex = 0.5)
+
+
+model5 <- lm(RYA_G ~ Win5, data = NEWNEW2021NFL)
+
+
+abline(model5, col = "blue", lwd = 2)
+
+
+eq5 <- paste0("y = ",
+round(coef(model5)[2], 2),
+"x + ",
+round(coef(model5)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win5),
+y = min(NEWNEW2021NFL$RYA_G),
+labels = eq5,
+pos = 4)
+
+
+ggplot(NEWNEW2021NFL, aes(x = Win5, y = RYA_G, label = Tm.4)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+labs(x = "Wins",
+y = "Rushing Yards Allowed/Game",
+title = "NFL Wins vs Rushing Yards Allowed/Game (2021)") +
+theme_minimal()
+
+ggplot(NEWNEW2021NFL, aes(x = Win5, y = RYA_G, label = Tm.4)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+geom_smooth(method = "lm", se = FALSE, color = "blue") +
+annotate("text",
+x = max(NEWNEW2021NFL$Win5),
+y = max(NEWNEW2021NFL$RYA_G),
+label = paste0("R = ", round(sign(coef(model5)[2]) * sqrt(summary(model5)$r.squared), 3),
+", R² = ", round(summary(model5)$r.squared, 3)),
+hjust = 1) +
+labs(x = "Wins",
+y = "Rushing Yards Allowed/Game",
+title = "NFL Wins vs Rushing Yards Allowed/Game (2021)") +
+theme_minimal()
+
+# Points Allowed
+
+
+library(ggplot2)
+library(ggrepel)
+
+
+plot(NEWNEW2021NFL$Win6,
+NEWNEW2021NFL$PA_G,
+xlab = "Wins",
+ylab = "Points Allowed/Game",
+main = "NFL Wins vs Points Allowed/Game (2021)")
+
+
+text(NEWNEW2021NFL$Win6,
+NEWNEW2021NFL$PA_G,
+labels = NEWNEW2021NFL$Tm.5,
+pos = 3,
+cex = 0.5)
+
+model6 <- lm(PA_G ~ Win6, data = NEWNEW2021NFL)
+
+abline(model6, col = "blue", lwd = 2)
+
+
+
+eq6 <- paste0("y = ",
+round(coef(model6)[2], 2),
+"x + ",
+round(coef(model6)[1], 2))
+
+text(x = max(NEWNEW2021NFL$Win6),
+y = min(NEWNEW2021NFL$PA_G),
+labels = eq6,
+pos = 4)
+
+
+
+ggplot(NEWNEW2021NFL, aes(x = Win6, y = PA_G, label = Tm.5)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+labs(x = "Wins",
+y = "Points Allowed/Game",
+title = "NFL Wins vs Points Allowed/Game (2021)") +
+theme_minimal()
+
+ggplot(NEWNEW2021NFL, aes(x = Win6, y = PA_G, label = Tm.5)) +
+geom_point(size = 3) +
+geom_text_repel(size = 3) +
+geom_smooth(method = "lm", se = FALSE, color = "blue") +
+annotate("text",
+x = max(NEWNEW2021NFL$Win6),
+y = max(NEWNEW2021NFL$PA_G),
+label = paste0("R = ", round(sign(coef(model6)[2]) * sqrt(summary(model6)$r.squared), 3),
+", R² = ", round(summary(model6)$r.squared, 3)),
+hjust = 1) +
+labs(x = "Wins",
+y = "Points Allowed/Game",
+title = "NFL Wins vs Points Allowed/Game (2021)") +
+theme_minimal()
+```
