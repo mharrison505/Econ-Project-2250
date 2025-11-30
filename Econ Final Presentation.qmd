@@ -230,4 +230,35 @@ text(x = max(X2022WITHWINS$Wins),
      y = min(X2022WITHWINS$RYdsA),
      labels = eq,
      pos = 4)
+
+
+
+```
+
+```{r}
+#For 2019 stats 
+library(broom)
+library(dplyr)
+library(readxl)
+# Change the path for each year (2019, 2022, 2023, 2024)
+nfl_2019 <- read_excel("nfl_2019.xlsx")
+
+# If Wins are stored in W column:
+nfl_2019 <- nfl_2019 %>%
+  mutate(Wins = W)
+
+# ---- MULTIPLE LINEAR REGRESSION ----
+# Predicting Wins using all 6 stats
+model_2019 <- lm(
+  Wins ~ PassYds_pg + RushYds_pg + Pts_pg +
+    PassYdsAllowed_pg + RushYdsAllowed_pg + PtsAllowed_pg,
+  data = nfl_2019
+)
+# Regression summary (coefficients, p-values, R-squared, etc.)
+summary(model_2019)
+
+# Nice tidy table (useful for report)
+tidy(model_2019)
+glance(model_2019)  # overall fit (R-squared, etc.)
+
 ```
