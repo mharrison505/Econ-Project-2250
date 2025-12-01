@@ -663,8 +663,13 @@ ggplot(nfl_2019, aes(x = W, y = PtsAllowed_pg, label = Team)) +
 
 ```
 
+\<\<\<\<\<\<\< HEAD
+
 ```{r}
 ### --- Load Packages ---
+
+
+
 library(readxl)
 library(ggplot2)
 library(dplyr)
@@ -673,11 +678,11 @@ library(dplyr)
 df <- read_excel("ALLSTATS2024.xlsx")
 
 ### --- Wins column ---
-wins <- df$W   # adjust if your column is not named exactly "W"
+wins <- df$W   # adjust if your wins column has a different name
 
-##############################################################
-# 1. Wins vs Pts
-##############################################################
+##################################################################
+# 1. Pts
+##################################################################
 
 stat <- df$Pts
 r_value <- cor(wins, stat, use = "complete.obs")
@@ -687,20 +692,20 @@ cat("\nWins vs Pts\n")
 cat("r =", round(r_value, 4), "\n")
 cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = Pts, y = W)) +
+ggplot(df, aes(x = W, y = Pts)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Wins vs Pts",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Pts",
-    y = "Wins"
+    title = "Wins vs Total Points (Pts)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Points"
   ) +
   theme_minimal()
 
-##############################################################
-# 2. Wins vs PYds
-##############################################################
+##################################################################
+# 2. PYds
+##################################################################
 
 stat <- df$PYds
 r_value <- cor(wins, stat, use = "complete.obs")
@@ -710,20 +715,20 @@ cat("\nWins vs PYds\n")
 cat("r =", round(r_value, 4), "\n")
 cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = PYds, y = W)) +
+ggplot(df, aes(x = W, y = PYds)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Wins vs PYds",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Passing Yards (PYds)",
-    y = "Wins"
+    title = "Wins vs Passing Yards (PYds)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Passing Yards"
   ) +
   theme_minimal()
 
-##############################################################
-# 3. Wins vs RYds
-##############################################################
+##################################################################
+# 3. RYds
+##################################################################
 
 stat <- df$RYds
 r_value <- cor(wins, stat, use = "complete.obs")
@@ -733,20 +738,20 @@ cat("\nWins vs RYds\n")
 cat("r =", round(r_value, 4), "\n")
 cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = RYds, y = W)) +
+ggplot(df, aes(x = W, y = RYds)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Wins vs RYds",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Rushing Yards (RYds)",
-    y = "Wins"
+    title = "Wins vs Rushing Yards (RYds)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Rushing Yards"
   ) +
   theme_minimal()
 
-##############################################################
-# 4. Wins vs PtsA
-##############################################################
+##################################################################
+# 4. PtsA
+##################################################################
 
 stat <- df$PtsA
 r_value <- cor(wins, stat, use = "complete.obs")
@@ -756,20 +761,20 @@ cat("\nWins vs PtsA\n")
 cat("r =", round(r_value, 4), "\n")
 cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = PtsA, y = W)) +
+ggplot(df, aes(x = W, y = PtsA)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Wins vs PtsA",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Points Allowed (PtsA)",
-    y = "Wins"
+    title = "Wins vs Points Allowed (PtsA)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Points Allowed"
   ) +
   theme_minimal()
 
-##############################################################
-# 5. Wins vs PYdsA
-##############################################################
+##################################################################
+# 5. PYdsA
+##################################################################
 
 stat <- df$PYdsA
 r_value <- cor(wins, stat, use = "complete.obs")
@@ -779,20 +784,21 @@ cat("\nWins vs PYdsA\n")
 cat("r =", round(r_value, 4), "\n")
 cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = PYdsA, y = W)) +
+ggplot(df, aes(x = W, y = PYdsA)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Wins vs PYdsA",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Passing Yards Allowed (PYdsA)",
-    y = "Wins"
+    title = "Wins vs Passing Yards Allowed (PYdsA)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Passing Yards Allowed"
   ) +
   theme_minimal()
 
-##############################################################
-# 6. Wins vs RYdsA
-##############################################################
+##################################################################
+# 6. RYdsA
+##################################################################
+
 
 
 
@@ -888,6 +894,22 @@ plot_stat(
   "NFL 2019: Wins vs Points Allowed/Game",
   color = "brown"
 )
+
+
+cat("\nWins vs RYdsA\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = W, y = RYdsA)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs Rushing Yards Allowed (RYdsA)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Rushing Yards Allowed"
+  ) +
+  theme_minimal()
 
 
 ```
