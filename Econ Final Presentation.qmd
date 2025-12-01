@@ -479,7 +479,10 @@ title = "NFL Wins vs Points Allowed/Game (2021)") +
 theme_minimal()
 ```
 
-```{library(readxl)}
+# 2024 Results
+
+```{install.packages(c("readxl","ggplot2","dplyr"))}
+library(readxl)
 library(ggplot2)
 library(dplyr)
 
@@ -596,12 +599,6 @@ ggplot(df, aes(x = W, y = RYdsA)) +
     y = "Rushing Yards Allowed"
   ) +
   theme_minimal()
-
-
-
-
-
-
 ```
 
 ```{r}
