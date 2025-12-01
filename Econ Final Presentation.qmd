@@ -479,32 +479,26 @@ title = "NFL Wins vs Points Allowed/Game (2021)") +
 theme_minimal()
 ```
 
+# 2024 Results
+
 ```{r}
-### --- Load Packages ---
-
-
-
+{install.packages(c("readxl","ggplot2","dplyr"))}
 library(readxl)
 library(ggplot2)
 library(dplyr)
 
-### --- Load Data ---
+
 df <- read_excel("ALLSTATS2024.xlsx")
 
-### --- Wins column ---
-wins <- df$W   # adjust if your wins column has a different name
 
-##################################################################
+wins <- df$W
+
+
 # 1. Pts
-##################################################################
 
 stat <- df$Pts
 r_value <- cor(wins, stat, use = "complete.obs")
 r_sq <- r_value^2
-
-cat("\nWins vs Pts\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
 ggplot(df, aes(x = W, y = Pts)) +
   geom_point(size = 3) +
@@ -517,17 +511,12 @@ ggplot(df, aes(x = W, y = Pts)) +
   ) +
   theme_minimal()
 
-##################################################################
+
 # 2. PYds
-##################################################################
 
 stat <- df$PYds
 r_value <- cor(wins, stat, use = "complete.obs")
 r_sq <- r_value^2
-
-cat("\nWins vs PYds\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
 ggplot(df, aes(x = W, y = PYds)) +
   geom_point(size = 3) +
@@ -540,17 +529,12 @@ ggplot(df, aes(x = W, y = PYds)) +
   ) +
   theme_minimal()
 
-##################################################################
+
 # 3. RYds
-##################################################################
 
 stat <- df$RYds
 r_value <- cor(wins, stat, use = "complete.obs")
 r_sq <- r_value^2
-
-cat("\nWins vs RYds\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
 ggplot(df, aes(x = W, y = RYds)) +
   geom_point(size = 3) +
@@ -563,17 +547,12 @@ ggplot(df, aes(x = W, y = RYds)) +
   ) +
   theme_minimal()
 
-##################################################################
+
 # 4. PtsA
-##################################################################
 
 stat <- df$PtsA
 r_value <- cor(wins, stat, use = "complete.obs")
 r_sq <- r_value^2
-
-cat("\nWins vs PtsA\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
 ggplot(df, aes(x = W, y = PtsA)) +
   geom_point(size = 3) +
@@ -586,17 +565,12 @@ ggplot(df, aes(x = W, y = PtsA)) +
   ) +
   theme_minimal()
 
-##################################################################
+
 # 5. PYdsA
-##################################################################
 
 stat <- df$PYdsA
 r_value <- cor(wins, stat, use = "complete.obs")
 r_sq <- r_value^2
-
-cat("\nWins vs PYdsA\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
 ggplot(df, aes(x = W, y = PYdsA)) +
   geom_point(size = 3) +
@@ -609,13 +583,23 @@ ggplot(df, aes(x = W, y = PYdsA)) +
   ) +
   theme_minimal()
 
-##################################################################
+
 # 6. RYdsA
-##################################################################
 
+stat <- df$RYdsA
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
 
-
-
+ggplot(df, aes(x = W, y = RYdsA)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs Rushing Yards Allowed (RYdsA)",
+    subtitle = paste("r =", round(r_value, 4), "  r² =", round(r_sq, 4)),
+    x = "Wins",
+    y = "Rushing Yards Allowed"
+  ) +
+  theme_minimal()
 ```
 
 ```{r}
