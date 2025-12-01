@@ -481,7 +481,8 @@ theme_minimal()
 
 # 2024 Results
 
-```{install.packages(c("readxl","ggplot2","dplyr"))}
+```{r}
+{install.packages(c("readxl","ggplot2","dplyr"))}
 library(readxl)
 library(ggplot2)
 library(dplyr)
