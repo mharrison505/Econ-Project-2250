@@ -661,3 +661,156 @@ ggplot(nfl_2019, aes(x = W, y = PtsAllowed_pg, label = Team)) +
 
 
 ```
+
+```{r}
+### --- Load Packages ---
+install.packages(c("readxl","ggplot2","dplyr"))
+library(readxl)
+library(ggplot2)
+library(dplyr)
+
+### --- Load Data ---
+df <- read_excel("ALLSTATS2024.xlsx")
+
+### --- Wins column ---
+wins <- df$W   # adjust if your column is not named exactly "W"
+
+##############################################################
+# 1. Wins vs Pts
+##############################################################
+
+stat <- df$Pts
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs Pts\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = Pts, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs Pts",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Pts",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+##############################################################
+# 2. Wins vs PYds
+##############################################################
+
+stat <- df$PYds
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs PYds\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = PYds, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs PYds",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Passing Yards (PYds)",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+##############################################################
+# 3. Wins vs RYds
+##############################################################
+
+stat <- df$RYds
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs RYds\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = RYds, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs RYds",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Rushing Yards (RYds)",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+##############################################################
+# 4. Wins vs PtsA
+##############################################################
+
+stat <- df$PtsA
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs PtsA\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = PtsA, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs PtsA",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Points Allowed (PtsA)",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+##############################################################
+# 5. Wins vs PYdsA
+##############################################################
+
+stat <- df$PYdsA
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs PYdsA\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = PYdsA, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs PYdsA",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Passing Yards Allowed (PYdsA)",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+##############################################################
+# 6. Wins vs RYdsA
+##############################################################
+
+stat <- df$RYdsA
+r_value <- cor(wins, stat, use = "complete.obs")
+r_sq <- r_value^2
+
+cat("\nWins vs RYdsA\n")
+cat("r =", round(r_value, 4), "\n")
+cat("r^2 =", round(r_sq, 4), "\n")
+
+ggplot(df, aes(x = RYdsA, y = W)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Wins vs RYdsA",
+    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
+    x = "Rushing Yards Allowed (RYdsA)",
+    y = "Wins"
+  ) +
+  theme_minimal()
+
+```
