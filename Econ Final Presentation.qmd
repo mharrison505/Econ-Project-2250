@@ -118,12 +118,6 @@ ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
            hjust = 1, vjust = 0) +
   theme_minimal()
 
-# Fit regression model
-model <- lm(Wins ~ `Pts For` + `PY/G` + `RY/G` + PA + PYdsA + RYdsA, data = X2022WITHWINS)
-
-# View coefficient tests
-summary(model)$coefficients
-
 ```
 
 ```{r}
@@ -607,11 +601,7 @@ ggplot(df, aes(x = W, y = RYdsA)) +
   ) +
   theme_minimal()
 
-
-# Fit regression model
 model <- lm(W ~ Pts + PYds + RYds + PtsA + PYdsA + RYdsA, data = nfl_data)
-
-# View coefficient tests
 summary(model)$coefficients
 
 
