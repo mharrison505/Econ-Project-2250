@@ -600,6 +600,29 @@ ggplot(df, aes(x = W, y = RYdsA)) +
     y = "Rushing Yards Allowed"
   ) +
   theme_minimal()
+
+
+# Load packages
+library(readxl)
+
+# Import your Excel file
+nfl_data <- read_excel("ALLSTATS2024.xlsx")
+
+# Fit regression model
+model <- lm(W ~ Pts + PYds + RYds + PtsA + PYdsA + RYdsA, data = nfl_data)
+
+# Extract F-statistic and p-value
+fstat <- summary(model)$fstatistic
+F_value <- fstat[1]
+df1 <- fstat[2]
+df2 <- fstat[3]
+p_value <- pf(F_value, df1, df2, lower.tail = FALSE)
+
+# Print results
+cat("F-statistic:", F_value, "\n")
+cat("Degrees of freedom:", df1, "and", df2, "\n")
+cat("p-value:", p_value, "\n")
+
 ```
 
 ```{r}
