@@ -660,11 +660,11 @@ ggplot(nfl_2019, aes(x = W, y = PtsAllowed_pg, label = Team)) +
   theme_minimal()
 
 
+
 ```
 
 ```{r}
 ### --- Load Packages ---
-install.packages(c("readxl","ggplot2","dplyr"))
 library(readxl)
 library(ggplot2)
 library(dplyr)
@@ -794,23 +794,100 @@ ggplot(df, aes(x = PYdsA, y = W)) +
 # 6. Wins vs RYdsA
 ##############################################################
 
-stat <- df$RYdsA
-r_value <- cor(wins, stat, use = "complete.obs")
-r_sq <- r_value^2
 
-cat("\nWins vs RYdsA\n")
-cat("r =", round(r_value, 4), "\n")
-cat("r^2 =", round(r_sq, 4), "\n")
 
-ggplot(df, aes(x = RYdsA, y = W)) +
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(
-    title = "Wins vs RYdsA",
-    subtitle = paste("r =", round(r_value, 4), "   r² =", round(r_sq, 4)),
-    x = "Rushing Yards Allowed (RYdsA)",
-    y = "Wins"
-  ) +
-  theme_minimal()
+```
+
+```{r}
+
+# ---- Helper function (tidy-eval version) ----
+plot_stat <- function(df, xvar, yvar, ylab, title, color="blue") {
+  
+  # tidy evaluation symbols
+  x <- rlang::ensym(xvar)
+  y <- rlang::ensym(yvar)
+  
+  # clean data
+  temp <- df %>% select(Team, !!x, !!y) %>% na.omit()
+  
+  # fit model
+  model <- lm(temp %>% pull(!!y) ~ temp %>% pull(!!x))
+  R_val  <- sign(coef(model)[2]) * sqrt(summary(model)$r.squared)
+  R2_val <- summary(model)$r.squared
+  
+  # plot
+  ggplot(temp, aes(x = !!x, y = !!y, label = Team)) +
+    geom_point(size = 3) +
+    geom_text_repel(size = 3) +
+    geom_smooth(method = "lm", se = FALSE, color = color) +
+    annotate(
+      "text",
+      x = Inf, y = Inf,
+      hjust = 1.1, vjust = 1.1,
+      size = 4,
+      label = paste0(
+        "R = ", round(R_val, 3),
+        "\nR2 = ", round(R2_val, 3)
+      )
+    ) +
+    labs(
+      x = "Wins",
+      y = ylab,
+      title = title
+    ) +
+    theme_minimal()
+}
+
+
+# ---- ALL SIX GRAPHS ----
+
+# 1. Wins vs Passing Yards/Game
+plot_stat(
+  nfl_2019, "W", "PassYds_pg",
+  "Passing Yards per Game",
+  "NFL 2019: Wins vs Passing Yards/Game",
+  color = "green"
+)
+
+# 2. Wins vs Rushing Yards/Game
+plot_stat(
+  nfl_2019, "W", "RushYds_pg",
+  "Rushing Yards per Game",
+  "NFL 2019: Wins vs Rushing Yards/Game",
+  color = "blue"
+)
+
+# 3. Wins vs Points/Game
+plot_stat(
+  nfl_2019, "W", "Pts_pg",
+  "Points per Game",
+  "NFL 2019: Wins vs Points per Game",
+  color = "purple"
+)
+
+# 4. Wins vs Passing Yards Allowed/Game
+plot_stat(
+  nfl_2019, "W", "PassYdsAllowed_pg",
+  "Passing Yards Allowed per Game",
+  "NFL 2019: Wins vs Passing Yards Allowed/Game",
+  color = "red"
+)
+
+# 5. Wins vs Rushing Yards Allowed/Game
+plot_stat(
+  nfl_2019, "W", "RushYdsAllowed_pg",
+  "Rushing Yards Allowed per Game",
+  "NFL 2019: Wins vs Rushing Yards Allowed/Game",
+  color = "orange"
+)
+
+# 6. Wins vs Points Allowed/Game
+plot_stat(
+  nfl_2019, "W", "PtsAllowed_pg",
+  "Points Allowed per Game",
+  "NFL 2019: Wins vs Points Allowed/Game",
+  color = "brown"
+)
+
 
 ```
