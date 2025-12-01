@@ -118,12 +118,6 @@ ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
            hjust = 1, vjust = 0) +
   theme_minimal()
 
-# Fit regression model
-model <- lm(Wins ~ `Pts For` + `PY/G` + `RY/G` + PA + PYdsA + RYdsA, data = X2022WITHWINS)
-
-# View coefficient tests
-summary(model)$coefficients
-
 ```
 
 ```{r}
@@ -483,6 +477,21 @@ labs(x = "Wins",
 y = "Points Allowed/Game",
 title = "NFL Wins vs Points Allowed/Game (2021)") +
 theme_minimal()
+
+
+p_value1 <- summary(model)$coefficients[2, 4]
+p_value2 <- summary(model2)$coefficients[2, 4]
+p_value3 <- summary(model3)$coefficients[2, 4]
+p_value4 <- summary(model4)$coefficients[2, 4]
+p_value5 <- summary(model5)$coefficients[2, 4]
+p_value6 <- summary(model6)$coefficients[2, 4]
+
+p_value1
+p_value2
+p_value3
+p_value4
+p_value5
+p_value6
 ```
 
 # 2024 Results
@@ -608,11 +617,27 @@ ggplot(df, aes(x = W, y = RYdsA)) +
   theme_minimal()
 
 
+# Load packages
+library(readxl)
+
+# Import your Excel file
+nfl_data <- read_excel("ALLSTATS2024.xlsx")
+
 # Fit regression model
 model <- lm(W ~ Pts + PYds + RYds + PtsA + PYdsA + RYdsA, data = nfl_data)
 
-# View coefficient tests
-summary(model)$coefficients
+# Extract F-statistic and p-value
+fstat <- summary(model)$fstatistic
+F_value <- fstat[1]
+df1 <- fstat[2]
+df2 <- fstat[3]
+p_value <- pf(F_value, df1, df2, lower.tail = FALSE)
+
+# Print results
+cat("F-statistic:", F_value, "\n")
+cat("Degrees of freedom:", df1, "and", df2, "\n")
+cat("p-value:", p_value, "\n")
+
 
 
 ```
