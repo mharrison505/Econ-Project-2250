@@ -479,17 +479,15 @@ title = "NFL Wins vs Points Allowed/Game (2021)") +
 theme_minimal()
 ```
 
-```{### --- Load Packages ---}
-install.packages(c("readxl","ggplot2","dplyr"))
-library(readxl)
+```{library(readxl)}
 library(ggplot2)
 library(dplyr)
 
-### --- Load Data ---
+
 df <- read_excel("ALLSTATS2024.xlsx")
 
-### --- Wins column ---
-wins <- df$W   # adjust if your wins column has a different name
+
+wins <- df$W
 
 
 # 1. Pts
@@ -529,7 +527,6 @@ ggplot(df, aes(x = W, y = PYds)) +
 
 
 # 3. RYds
-
 
 stat <- df$RYds
 r_value <- cor(wins, stat, use = "complete.obs")
