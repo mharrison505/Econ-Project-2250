@@ -29,9 +29,9 @@ ggplot(X2022WITHWINS, aes(x = PA, y = PYdsA, label = '')) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
   labs(x = "Points Allowed", y = "Passing Yards Allowed", title = "NFL Points Allowed vs Passing Yards Allowed") +
   annotate("text",
-           x = max(X2022WITHWINS$Wins),
-           y = min(X2022WITHWINS$PA),
-           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$PA),
+           x = max(X2022WITHWINS$PA),
+           y = min(X2022WITHWINS$PYdsA),
+           label = make_r_label(X2022WITHWINS$PA, X2022WITHWINS$PYdsA),
            hjust = 1, vjust = 0) +
   theme_minimal()
 
