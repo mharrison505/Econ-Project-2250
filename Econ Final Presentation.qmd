@@ -105,7 +105,6 @@ ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
            hjust = 1, vjust = 0) +
   theme_minimal()
 
-<<<<<<< HEAD
 ```
 
 ```{r}
