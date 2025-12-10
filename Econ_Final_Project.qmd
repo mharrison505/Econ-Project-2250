@@ -99,7 +99,6 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `TO Lost (Offense)`, label = '')) +
            hjust = 1, vjust = 0) +
   theme_minimal()
 # View coefficient tests
-summary(model)$coefficients
 
 ```
 
