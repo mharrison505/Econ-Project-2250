@@ -61,7 +61,7 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `RY/G`, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Points Scored", y = "Takeaways", title = "NFL Points Scored vs Rushing Yards") +
+  labs(x = "Points Scored", y = "Rushing Yards", title = "NFL Points Scored vs Rushing Yards") +
   annotate("text",
            x = max(NFL_Stats$`Pts For`),
            y = min(NFL_Stats$`RY/G`),
@@ -74,7 +74,7 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `PY/G`, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Points Scored", y = "Takeaways", title = "NFL Points Scored vs Passing Yards") +
+  labs(x = "Points Scored", y = "Passing Yards", title = "NFL Points Scored vs Passing Yards") +
   annotate("text",
            x = max(NFL_Stats$`Pts For`),
            y = min(NFL_Stats$`PY/G`),
@@ -87,7 +87,7 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `TO Lost (Offense)`, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Points Scored", y = "Takeaways", title = "NFL Points Scored vs Turnovers Lost") +
+  labs(x = "Points Scored", y = "Turnovers Lost", title = "NFL Points Scored vs Turnovers Lost") +
   annotate("text",
            x = max(NFL_Stats$`Pts For`),
            y = min(NFL_Stats$`TO Lost (Offense)`),
