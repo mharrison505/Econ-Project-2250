@@ -104,6 +104,10 @@ ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
            label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$RYdsA),
            hjust = 1, vjust = 0) +
   theme_minimal()
+<<<<<<< HEAD
+=======
+
+>>>>>>> a6ef9d07fd4137a7b3caee110c038b15131c51e6
 ```
 
 ```{r}
