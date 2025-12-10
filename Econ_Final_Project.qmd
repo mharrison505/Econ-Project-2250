@@ -48,7 +48,7 @@ ggplot(NFL_Stats, aes(x = PA, y = `Takeaways(Defense)`, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Points Allowed", y = "Takeaways", title = "NFL Points Allowed vs Passing Yards Allowed") +
+  labs(x = "Points Allowed", y = "Takeaways", title = "NFL Points Allowed vs Takeaways") +
   annotate("text",
            x = max(NFL_Stats$PA),
            y = min(NFL_Stats$`Takeaways(Defense)`),
