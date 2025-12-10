@@ -5,27 +5,14 @@ editor: visual
 ---
 
 ```{r}
-#Im testing to see if it works
-
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load(
-tidyverse,
-probstats4econ,
-kableExtra,
-RColorBrewer,
-curl,
-usethis,
-ggrepel)
-
-#X2022WITHWINS%>%glimpse()
-
+library(ggplot2)
+library(ggrepel)
 ```
 
 ```{r}
+
+
 #all the 2022 stats, wins v PA
-library(ggplot2)
-library(ggrepel)
 
 # Helper function to compute r and r2 label
 make_r_label <- function(x, y) {
@@ -36,15 +23,15 @@ make_r_label <- function(x, y) {
 }
 
 ### 1. Wins vs Points Allowed (PA)
-ggplot(X2022WITHWINS, aes(x = Wins, y = PA, label = Tm)) +
+ggplot(X2022WITHWINS, aes(x = PA, y = PYdsA, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Wins", y = "Points Allowed", title = "NFL 2022 Wins vs Points Allowed") +
+  labs(x = "Points Allowed", y = "Passing Yards Allowed", title = "NFL Points Allowed vs Passing Yards Allowed") +
   annotate("text",
-           x = max(X2022WITHWINS$Wins),
-           y = min(X2022WITHWINS$PA),
-           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$PA),
+           x = max(X2022WITHWINS$PA),
+           y = min(X2022WITHWINS$PYdsA),
+           label = make_r_label(X2022WITHWINS$PA, X2022WITHWINS$PYdsA),
            hjust = 1, vjust = 0) +
   theme_minimal()
 
@@ -118,6 +105,7 @@ ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
            hjust = 1, vjust = 0) +
   theme_minimal()
 
+<<<<<<< HEAD
 ```
 
 ```{r}
@@ -733,3 +721,11 @@ plot_stat(
   color = "brown"
 )
 ```
+=======
+model <- lm(Wins ~ `Pts For` + `PY/G` + `RY/G` + PA + PYdsA + RYdsA, data = X2022WITHWINS)
+
+# View coefficient tests
+summary(model)$coefficients
+
+```
+>>>>>>> 87c34df20024d065a638111427352d86908fbac2
