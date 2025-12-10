@@ -9,7 +9,7 @@ make_r_label <- function(x, y) {
          "\nr² = ", round(r2, 3))
 }
 
-### 1. Wins vs Points Allowed (PA)
+### 1. PA vs PYdsA
 ggplot(X2022WITHWINS, aes(x = PA, y = PYdsA, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
