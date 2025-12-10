@@ -97,3 +97,21 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `TO Lost (Offense)`, label = '')) +
 # View coefficient tests
 summary(model)$coefficients
 ```
+```{r}
+# Optional: nicer p-value formatting
+options(scipen = 5)
+
+offense_model <- lm(`Pts For` ~ `PY/G` + `RY/G` + `TO Lost (Offense)`,
+                    data =NFL_Stats)
+
+defense_model <- lm(PA ~ PYdsA + RYdsA + `Takeaways(Defense)`,
+                    data = NFL_Stats)
+
+offense_coefs <- summary(offense_model)$coefficients
+offense_coefs
+
+defense_coefs <- summary(defense_model)$coefficients
+defense_coefs
+
+```
+
