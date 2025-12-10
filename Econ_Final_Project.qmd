@@ -12,7 +12,17 @@ This project is an analysis of different NFL statistics and how they relate to p
 
 # Methodology:
 
-Ho: The {offensive statistic measured} doesn’t statistically contribute to the amount points that a team obtains in any given NFL regular season game from 2014 - 2024 Ha: The {offensive statistic measured} statistically contributes to the amount of points that a team obtains in any given NFL regular season game game from 2014 - 2024 Ho2: The {Defensive statistic measured} doesn’t statistically contribute to the amount points that a team allows in any given NFL regular season game from 2014 - 2024 Ha2: The {Defensive statistic measured} statistically contributes to the amount of points that a team allows in any given NFL regular season game from 2014 - 2024 We used a random number generator to make sure this generalized First we grabbed and cleaned our data from pro football reference into R To test our null and alternative hypothesis we are using the regression test to determine if any are statistically significant. We will be using a confidence interval of 95% percent. Also, we will see which is one the most statistically significant overall for each side of the ball
+Ho: The {offensive statistic measured} doesn’t statistically contribute to the amount points that a team obtains in any given NFL regular season game from 2014 - 2024
+
+Ha: The {offensive statistic measured} statistically contributes to the amount of points that a team obtains in any given NFL regular season game game from 2014 - 2024
+
+Ho2: The {Defensive statistic measured} doesn’t statistically contribute to the amount points that a team allows in any given NFL regular season game from 2014 - 2024
+
+Ha2: The {Defensive statistic measured} statistically contributes to the amount of points that a team allows in any given NFL regular season game from 2014 - 2024
+
+We used a random number generator to make sure this generalized.
+
+First we grabbed and cleaned our data from pro football reference into R. To test our null and alternative hypothesis we are using the regression test to determine if any are statistically significant. We will be using a confidence interval of 95% percent. Also, we will see which is one the most statistically significant overall for each side of the ball
 
 # Results:
 
