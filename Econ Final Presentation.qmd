@@ -23,11 +23,11 @@ make_r_label <- function(x, y) {
 }
 
 ### 1. Wins vs Points Allowed (PA)
-ggplot(X2022WITHWINS, aes(x = Wins, y = PA, label = Tm)) +
+ggplot(X2022WITHWINS, aes(x = PA, y = PYdsA, label = '')) +
   geom_point(size = 3) +
   geom_text_repel(size = 3) +
   geom_smooth(method = "lm", color = "green", se = FALSE) +
-  labs(x = "Wins", y = "Points Allowed", title = "NFL 2022 Wins vs Points Allowed") +
+  labs(x = "Points Allowed", y = "Passing Yards Allowed", title = "NFL Points Allowed vs Passing Yards Allowed") +
   annotate("text",
            x = max(X2022WITHWINS$Wins),
            y = min(X2022WITHWINS$PA),
