@@ -98,12 +98,11 @@ ggplot(NFL_Stats, aes(x = `Pts For`, y = `TO Lost (Offense)`, label = '')) +
            label = make_r_label(NFL_Stats$`Pts For`, NFL_Stats$`TO Lost (Offense)`),
            hjust = 1, vjust = 0) +
   theme_minimal()
-# View coefficient tests
 
 ```
 
 ```{r}
-# Optional: nicer p-value formatting
+#p-value
 options(scipen = 5)
 
 offense_model <- lm(`Pts For` ~ `PY/G` + `RY/G` + `TO Lost (Offense)`,
