@@ -6,6 +6,10 @@ install.packages("ggrepel")   # only if not installed
 library(ggrepel)
 ```
 
+# Introduction and Data: 
+
+This project is an analysis of different NFL statistics and how they relate to points scored per game. Originally, we compared 3 offensive and 3 defensive statistics to wins (including points and points allowed), which obviously showed that wins were most correlated to points scored. After compiling our data and presenting it, we realized that this project said nothing about who wins in the NFL regular season. Because of this, we changed our focus to comparing 3 offensive statistics (rushing yards, passing yards, turnovers lost) and 3 defensive statistics (rushing yards allowed, passing yards allowed, takeaways) to points per game and points allowed per game respectively. We will attempt to refute the hypothesis that any of these 6 particular statistics do not significantly contribute to the overall points per game (offense) or points allowed per game (defense) statistic.
+
 ```{r}
 
 
