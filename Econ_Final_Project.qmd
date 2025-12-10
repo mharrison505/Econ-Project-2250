@@ -1,4 +1,99 @@
-Econ_Final_Project
+```{r}
+#Stats
+
+# Helper function to compute r and r2 label
+make_r_label <- function(x, y) {
+  r <- cor(x, y)
+  r2 <- r^2
+  paste0("r = ", round(r, 3),
+         "\nr² = ", round(r2, 3))
+}
+
+### 1. Wins vs Points Allowed (PA)
+ggplot(X2022WITHWINS, aes(x = PA, y = PYdsA, label = '')) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Points Allowed", y = "Passing Yards Allowed", title = "NFL Points Allowed vs Passing Yards Allowed") +
+  annotate("text",
+           x = max(X2022WITHWINS$PA),
+           y = min(X2022WITHWINS$PYdsA),
+           label = make_r_label(X2022WITHWINS$PA, X2022WITHWINS$PYdsA),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
 
 
-Print("hello World")
+### 2. Wins vs Rushing Yards/Game (RY/G)
+ggplot(X2022WITHWINS, aes(x = Wins, y = `RY/G`, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Wins", y = "Rushing Yards Per Game", title = "NFL 2022 Wins vs Rushing Yards Per Game") +
+  annotate("text",
+           x = max(X2022WITHWINS$Wins),
+           y = min(X2022WITHWINS$`RY/G`),
+           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$`RY/G`),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
+
+
+### 3. Wins vs Passing Yards/Game (PY/G)
+ggplot(X2022WITHWINS, aes(x = Wins, y = `PY/G`, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Wins", y = "Passing Yards Per Game", title = "NFL 2022 Wins vs Passing Yards Per Game") +
+  annotate("text",
+           x = max(X2022WITHWINS$Wins),
+           y = min(X2022WITHWINS$`PY/G`),
+           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$`PY/G`),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
+
+
+### 4. Wins vs Points Scored (Pts For)
+ggplot(X2022WITHWINS, aes(x = Wins, y = `Pts For`, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Wins", y = "Points Scored Per Game", title = "NFL 2022 Wins vs Points Scored Per Game") +
+  annotate("text",
+           x = max(X2022WITHWINS$Wins),
+           y = min(X2022WITHWINS$`Pts For`),
+           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$`Pts For`),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
+
+
+### 5. Wins vs Passing Yards Allowed (PYdsA)
+ggplot(X2022WITHWINS, aes(x = Wins, y = PYdsA, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Wins", y = "Passing Yards Allowed Per Game", title = "NFL 2022 Wins vs Passing Yards Allowed") +
+  annotate("text",
+           x = max(X2022WITHWINS$Wins),
+           y = min(X2022WITHWINS$PYdsA),
+           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$PYdsA),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
+
+
+### 6. Wins vs Rushing Yards Allowed (RYdsA)
+ggplot(X2022WITHWINS, aes(x = Wins, y = RYdsA, label = Tm)) +
+  geom_point(size = 3) +
+  geom_text_repel(size = 3) +
+  geom_smooth(method = "lm", color = "green", se = FALSE) +
+  labs(x = "Wins", y = "Rushing Yards Allowed Per Game", title = "NFL 2022 Wins vs Rushing Yards Allowed") +
+  annotate("text",
+           x = max(X2022WITHWINS$Wins),
+           y = min(X2022WITHWINS$RYdsA),
+           label = make_r_label(X2022WITHWINS$Wins, X2022WITHWINS$RYdsA),
+           hjust = 1, vjust = 0) +
+  theme_minimal()
+
+model <- lm(Wins ~ `Pts For` + `PY/G` + `RY/G` + PA + PYdsA + RYdsA, data = X2022WITHWINS)
+
+# View coefficient tests
+summary(model)$coefficients
+```
