@@ -10,6 +10,14 @@
 
 This project is an analysis of different NFL statistics and how they relate to points scored per game. Originally, we compared 3 offensive and 3 defensive statistics to wins (including points and points allowed), which obviously showed that wins were most correlated to points scored. After compiling our data and presenting it, we realized that this project said nothing about who wins in the NFL regular season. Because of this, we changed our focus to comparing 3 offensive statistics (rushing yards, passing yards, turnovers lost) and 3 defensive statistics (rushing yards allowed, passing yards allowed, takeaways) to points per game and points allowed per game respectively. We will attempt to refute the hypothesis that any of these 6 particular statistics do not significantly contribute to the overall points per game (offense) or points allowed per game (defense) statistic.
 
+# Methodology:
+
+Ho: The {offensive statistic measured} doesn’t statistically contribute to the amount points that a team obtains in any given NFL regular season game from 2014 - 2024 Ha: The {offensive statistic measured} statistically contributes to the amount of points that a team obtains in any given NFL regular season game game from 2014 - 2024 Ho2: The {Defensive statistic measured} doesn’t statistically contribute to the amount points that a team allows in any given NFL regular season game from 2014 - 2024 Ha2: The {Defensive statistic measured} statistically contributes to the amount of points that a team allows in any given NFL regular season game from 2014 - 2024 We used a random number generator to make sure this generalized First we grabbed and cleaned our data from pro football reference into R To test our null and alternative hypothesis we are using the regression test to determine if any are statistically significant. We will be using a confidence interval of 95% percent. Also, we will see which is one the most statistically significant overall for each side of the ball
+
+# Results:
+
+Our test informed us that for offense every data point was statistically significant besides TO Lost. The highest R value was passing yards per game with a R value of .511 which shows it has a moderate correlation with wins. For defense we found that only rushing yards allowed was statistically significant and it also had the highest R value. This outcome rejects our null hypothesis because more than one stat on each side of the ball was statistically significant
+
 ```{r}
 
 
