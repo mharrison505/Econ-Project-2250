@@ -117,3 +117,7 @@ offense_coefs
 defense_coefs <- summary(defense_model)$coefficients
 defense_coefs
 ```
+
+# Conclusions and Future Work:
+
+By performing this statistical analysis we have come to the conclusion that offensive statistics are much more indicative of points per game than defensive stats are of points allowed per game. Because the p-values obtained from each offensive statistic (excluding takeaways) are much smaller than the p-values obtained from each defensive statistic (though rushing yards allowed per game is still statistically significant), the data suggests that the strength of the offense of any given NFL team during the regular seasons from 2019-2024 is a much stronger deciding factor in points scored/allowed than the strength of the defense of that same team. Our analysis was limited to the regular season because post-season data was difficult to compile, and would also conflict with the teams that do not get post-season play. This analysis could be improved with a larger sampling pool, although going too far back may change the trends because NFL playcalling changes as time goes on. Our data also does not account for injuries. In the future, we could investigate potential trade outlooks for different teams, adding to our scope star players for each team and compare results to see which team needs players who have high scores in statistics that the team is lacking in.
