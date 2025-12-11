@@ -1,9 +1,16 @@
 ```{r}
+---
+title: "Econ Final Project"
+format: pdf
+---
+
 #Stats
 #install.packages("ggplot2")   # only if not installed
 #library(ggplot2)
 #install.packages("ggrepel")   # only if not installed
 #library(ggrepel)
+library(ggplot2)
+
 ```
 
 # Introduction and Data: 
