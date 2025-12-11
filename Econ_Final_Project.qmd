@@ -1,9 +1,9 @@
 ```{r}
 #Stats
-install.packages("ggplot2")   # only if not installed
-library(ggplot2)
-install.packages("ggrepel")   # only if not installed
-library(ggrepel)
+#install.packages("ggplot2")   # only if not installed
+#library(ggplot2)
+#install.packages("ggrepel")   # only if not installed
+#library(ggrepel)
 ```
 
 # Introduction and Data: 
