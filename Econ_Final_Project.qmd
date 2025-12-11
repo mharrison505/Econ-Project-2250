@@ -1,16 +1,18 @@
 ---
 title: "Econ Final Project"
+author: "Levi Robertson, Aaryan Thacker, Jonathan Irwanto, Fischer Harrison"
 format: pdf
 ---
 
-``` r
+```{r}
 #Stats
 #install.packages("ggplot2")   # only if not installed
 #library(ggplot2)
 #install.packages("ggrepel")   # only if not installed
-#library(ggrepel)
-library(ggplot)
+library(ggrepel)
 library(ggplot2)
+library(readxl)
+NFL_Stats <- read_excel("data/NFL Stats.xlsx")
 ```
 
 # Introduction and Data:
